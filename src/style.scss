@@ -1,0 +1,260 @@
+body {
+  margin: 0px;
+}
+.formContainer {
+  background-color: rgb(167, 225, 210);
+  font-family: "Courier New", Courier, monospace !important;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .formWrapper {
+    // Add your styles for .formWrapper here
+
+    padding: 20px 50px;
+    background-color: azure;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    .title {
+      font-size: 30px;
+      font-weight: bold;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      input {
+        font-family: "Courier New", Courier, monospace !important;
+      }
+      .btn-sign-up {
+        background-color: darkviolet;
+        color: white;
+      }
+      label {
+        display: flex;
+        align-items: center;
+        img {
+          height: 40px;
+          width: 40px;
+        }
+      }
+    }
+    .logo {
+      color: rgb(33, 35, 88);
+      font-weight: bold;
+    }
+  }
+}
+
+.home {
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  background-color: #8a72bea7;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .container {
+    overflow: hidden;
+    border: 1px solid white;
+    width: 65%;
+    border-radius: 10px;
+    height: 80%;
+    display: flex;
+    .chat {
+      flex: 2;
+      align-items: center;
+      justify-content: center;
+      .chatInfo {
+        color: beige;
+        background-color: #7750a9;
+        display: flex;
+        height: 40px;
+        padding: 10px;
+        align-items: center;
+        justify-content: space-between;
+        .chatIcons {
+          display: flex;
+          gap: 10px;
+          img {
+            height: 24px;
+            cursor: pointer;
+          }
+        }
+      }
+      .messages {
+        background-color: rgb(221, 216, 216);
+        padding: 10px;
+        height: calc(100% - 130px);
+        display: flex;
+        flex-direction:column;
+        overflow: scroll;
+        .message{
+          display: flex;
+          margin-bottom: 10px;
+           .messageInfo{
+            display:flex;
+            padding: 5px;
+            flex-direction: column;
+            img{
+              height: 30px;
+              width: 30px;
+              border-radius: 50%;
+            }
+            span{
+                font-size: 13px;
+            }
+          }
+          .messageContent{
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            // padding: 10px;
+            max-width: 80%;
+            P{
+              background-color: white;
+              padding: 10px 20px;
+              max-width: max-content;
+              border-radius: 0px 10px 10px 10px;
+              margin: 0px;
+            }
+            img{
+              padding: 0px;
+              width: 50%;
+            }
+          }
+          &.owner{
+            // background-color: aqua;
+            flex-direction: row-reverse;
+            .messageContent{
+            align-items: flex-end;
+            p{
+              max-width: max-content;
+              border-radius: 10px 0px 10px 10px;
+            }}
+          }
+        }
+      }
+      .inputbar {
+        background-color: white;
+        height: 50px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        input {
+          padding-left: 10px;
+          width: 100%;
+          height: 90%;
+          outline: none;
+          border: none;
+          font-size: 18px;
+          &::placeholder {
+            color: lightgray;
+          }
+        }
+        .send {
+          display: flex;
+          padding: 10px;
+          align-items: center;
+
+          img {
+            height: 24px;
+            margin-right: 10px;
+            cursor: pointer;
+          }
+          button {
+            border: none;
+            padding: 5px;
+            color: whitesmoke;
+            font-size: 15px;
+            border-radius: 4px;
+            background-color: blueviolet;
+          }
+        }
+      }
+    }
+    .sidebar {
+      flex: 1;
+      background-color: #7750a9;
+      position: relative;
+      .navbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 40px;
+        padding: 10px;
+        color: whitesmoke;
+        background-color: #663399;
+        .user {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          img {
+            background-color: whitesmoke;
+            height: 24px;
+            width: 24px;
+            border-radius: 50%;
+            object-fit: cover;
+          }
+          button {
+            cursor: pointer;
+            background-color: #c5aedf;
+            border: 0;
+            font-size: 10px;
+            font-weight: bold;
+          }
+        }
+      }
+      .search {
+        border-bottom: 1px solid darkgrey;
+        .searchForm {
+          display: flex;
+          padding: 10px;
+          input {
+            color: white;
+            background-color: #7750a9;
+            border: none;
+            outline: none;
+            &::placeholder {
+              color: lightgray;
+            }
+          }
+        }
+      }
+      .userChat {
+        display: flex;
+        padding: 10px;
+        align-items: center;
+        color: white;
+        cursor: pointer;
+        &:hover {
+          background-color: #663399;
+        }
+        .userChatInfo {
+          padding: opx;
+          span {
+            font-size: 18px;
+            font-weight: 500;
+          }
+          p {
+            font-size: 14px;
+            margin: 0;
+            color: antiquewhite;
+          }
+        }
+        img {
+          background-color: whitesmoke;
+          height: 34px;
+          width: 34px;
+          border-radius: 50%;
+          object-fit: cover;
+          margin-right: 10px;
+        }
+      }
+    }
+  }
+}
