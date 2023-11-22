@@ -1,5 +1,15 @@
 import React, { useContext, useState } from "react";
-import { collection, query, where, getDocs, setDoc ,doc, updateDoc} from "firebase/firestore";
+import {
+  collection,
+  query,
+  where,
+  getDocs,
+  setDoc,
+  doc,
+  updateDoc,
+  serverTimestamp,
+  getDoc,
+} from "firebase/firestore";  
 import { db } from "../../firebase";
 import { AuthContext } from "../../context/AuthContext";
 
@@ -7,8 +17,9 @@ const Search = () => {
   const [username, setUsername] = useState("");
   const [err, setErr] = useState(false);
   const [user, setUser] = useState("");
-  const [currentUser] = useContext(AuthContext)
+  const {currentUser} = useContext(AuthContext)
 
+  // console.log(currentUser);
   const handleKey = (e) => {
     e.code === "Enter" && handleSearch();
   };
@@ -34,24 +45,42 @@ const Search = () => {
   };
   const handleSelect = async()=>{
     // creating combined id which will be our unique id for the chats between this two user
+    debugger
     const combinedId = currentUser.uid > user.uid ? currentUser.uid+user.uid :user.uid+currentUser.uid
     try{
       // 
-      const res = await getDocs(db,"chats",combinedId)
+      const res = await getDoc(doc(db,"chats",combinedId))
+      // console.log(!res.exists());
       if(!res.exists()){
         // create chats if not present
-        await setDoc(doc,(db,"chats",combinedId) , {messages:[]});
+        console.log("creating chats as not already present!!!");
+        await setDoc(doc(db,"chats",combinedId) , {messages:[]});
         // create userChats for both user
         await updateDoc(doc(db,"userChats",currentUser.uid),{
           [combinedId+".userInfo"]:{uid:user.uid,displayName:user.displayName,photoURL:user.photoURL}
         })
+
+        await updateDoc(doc(db, "userChats", user.uid), {
+          [combinedId + ".userInfo"]: {
+            uid: currentUser.uid,
+            displayName: currentUser.displayName,
+            photoURL: currentUser.photoURL,
+          },
+          [combinedId + ".date"]: serverTimestamp(),
+        });
+
+      }else{
+        console.log("logs do exists!@");
       }
     }
     catch(err){
-
+      debugger
+      console.log(err);
     }
+    setUser(null);
+    setUsername("")
   }
-  console.log({err})
+  // console.log({err})
   return (
     <div>
       <div className="search">
@@ -61,6 +90,7 @@ const Search = () => {
             onKeyDown={handleKey}
             onChange={(e) => setUsername(e.target.value)}
             placeholder="enter a name .."
+            value={username}
           />
         </div>
 
